@@ -93,7 +93,7 @@ namespace Learnheuristics.Model {
             var dimensional_size = hyper_points.All(hyper_point => hyper_point.DimensionalSize > 1) ? hyper_points.First().DimensionalSize : 1;
             if (dimensional_size < 2)
                 throw new ArgumentException("Solo se pueden graficar vectores con al menos dos dimensiones.");
-            string path_to_script = @"C:\Users\Trifenix\Desktop\PlotPoints.py";
+            string path_to_script = @"C:\Users\Trifenix\Desktop\Tesis_Learnheuristics\PlotPoints.py";
             if (arguments == null)
                 arguments = new Dictionary<string, object>();
             arguments["x"] = $"[{string.Join(',', hyper_points.Select(hyper_point => hyper_point.coordinates[0]).ToList())}]";

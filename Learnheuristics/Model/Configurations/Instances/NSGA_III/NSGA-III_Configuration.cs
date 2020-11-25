@@ -39,7 +39,7 @@ namespace Learnheuristics.Model.Configurations.Instances.NSGA_III {
         //Evalúa la configuración: Este método debe ejecutar PythonScripter.Run para iniciar el script de python que utiliza la metaheurística de bajo nivel.
         //En este caso, ejecuta NSGA-III.py
         public float Evaluate(int max_iterations = 1, int seed = 1) {
-            string path_to_script = @"C:\Users\Trifenix\Desktop\NSGA-III.py";
+            string path_to_script = @"C:\Users\Trifenix\Desktop\Tesis_Learnheuristics\NSGA-III.py";
             var arguments = new Dictionary<string, object>();
             foreach (var parameterName in Enum.GetNames(typeof(NSGA_III_Parameters)))
                 arguments.Add(parameterName, Parameter(parameterName));
