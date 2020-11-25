@@ -1,19 +1,20 @@
-﻿using Services;
+﻿using Learnheuristics.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Learnheuristics.ConfigurationTuner.Configurations.Instances.NSGA {
+namespace Learnheuristics.Model.Configurations.Instances.NSGA_III {
 
-    //Si una configuration ha sido transformada más de N veces sin éxito debe repararse ya que se encuentra en un area infactible (?)
+    //Representa una instancia de configuración.
     public class NSGA_III_Configuration : Configuration<NSGA_III_Parameters>, IConfiguration {
 
+        //Asigna restricciones de forma estática a la clase, ya que estas restricciones se comparten entre todas las instancias de la configuración.
         static NSGA_III_Configuration() {
             var number_of_parameters = Enum.GetNames(typeof(NSGA_III_Parameters)).Length;
             Parameters = new Parameter[number_of_parameters];
             Parameters[(int)NSGA_III_Parameters.n_partitions] = new Parameter {
                 min_value = 1,
-                max_value = 80,
+                max_value = 100,
                 TransformByDomain = (value) => Convert.ToInt32(Math.Round(value))
             };
             Parameters[(int)NSGA_III_Parameters.pop_size] = new Parameter {
@@ -35,9 +36,10 @@ namespace Learnheuristics.ConfigurationTuner.Configurations.Instances.NSGA {
             CountdownToRepair = 3;
         }
 
+        //Evalúa la configuración: Este método debe ejecutar PythonScripter.Run para iniciar el script de python que utiliza la metaheurística de bajo nivel.
+        //En este caso, ejecuta NSGA-III.py
         public float Evaluate(int max_iterations = 1, int seed = 1) {
             string path_to_script = @"C:\Users\Trifenix\Desktop\NSGA-III.py";
-            TransformByDomain();
             var arguments = new Dictionary<string, object>();
             foreach (var parameterName in Enum.GetNames(typeof(NSGA_III_Parameters)))
                 arguments.Add(parameterName, Parameter(parameterName));
@@ -48,9 +50,8 @@ namespace Learnheuristics.ConfigurationTuner.Configurations.Instances.NSGA {
             return Performance;
         }
 
-        public override string ToString() {
-            return Vectorized_Configuration.ToString();
-        }
+        //Representa las coordenadas de la configuración vectorizada de acuerdo con el siguiente formato: (x,y,z)
+        public override string ToString() => base.ToString(); //TODO: Revisar si es necesario o si se hereda el override
 
     }
 

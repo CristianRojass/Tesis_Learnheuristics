@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Learnheuristics.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Services {
-    //Esta clase encapsula representación vectorial de las configuraciones de parámetros como puntos en el hiperespacio.
+namespace Learnheuristics.Model {
+
+    //Encapsula representación vectorial de las configuraciones de parámetros como puntos en el hiperespacio.
     public class Vector {
 
-        //Coordenadas del vector. Cada coordenada representa el valor de un parámetro de una configuración de algoritmo.
+        //Coordenadas del vector: Cada coordenada representará el valor de un parámetro de una configuración de algoritmo.
         public float[] coordinates;
 
         //Obtiene la cantidad de dimensiones que tiene el vector.
@@ -28,11 +30,11 @@ namespace Services {
                 throw new InvalidOperationException($"No se pueden {(operation.Equals('+') ? "sumar" : "restar")} los vectores ya que no poseen la misma dimensionalidad.");
             var resultant_vector = new float[vector_A.coordinates.Length];
             for (int i = 0; i < vector_A.coordinates.Length; i++)
-                resultant_vector[i] = operation.Equals('+') ? vector_A.coordinates[i] + vector_B.coordinates[i] : vector_A.coordinates[i] - vector_B.coordinates[i];
+                resultant_vector[i] = Convert.ToSingle(operation.Equals('+') ? (decimal)vector_A.coordinates[i] + (decimal)vector_B.coordinates[i] : (decimal)vector_A.coordinates[i] - (decimal)vector_B.coordinates[i]);
             return new Vector(resultant_vector);
         }
 
-        //Amplifica el vector multiplicando cada una de sus componentes por <scale>.
+        //Amplifica un vector multiplicando cada una de sus componentes por <scale>.
         public static Vector Scale(Vector vector, float scale) {
             var resultant_vector = new Vector(vector.coordinates, scale);
             return resultant_vector;
@@ -44,7 +46,11 @@ namespace Services {
             return module;
         }
 
-        public static Vector Reduce(List<Vector> vectors) => vectors.Aggregate((A, B) => Add(A, B));
+        //Reduce una lista de vectores a un único vector resultante de las sumas consecutivas de estos.
+        public static Vector Reduce(List<Vector> vectors) {
+            var resultant_vector = vectors.Aggregate((A, B) => Add(A, B));
+            return resultant_vector;
+        }
 
         //Obtiene el producto cartesiano de un vector con si mismo de forma recursiva. Esto sirve para determinar las posibles direcciones a las que puedo moverme según la dimensión.
         //  Ejemplo de visualización
@@ -69,28 +75,24 @@ namespace Services {
             return result;
         }
 
-        //Grafica una lista de vectores de segunda o tercera dimensión, desde cuarta dimensión hacia arriba sólo se pueden imprimir los puntos (tuplas) en consola.
+        //Grafica una lista de vectores de segunda o tercera dimensión, desde cuarta dimensión hacia arriba sólo se pueden graficar las primeras 3 componentes (x,y,z).
         //Tuplas que identifican rotación horizontal/vertical para Custom_Scatter3D (Gráfica 3D personalizada).
         //Cantidad de tuplas permitidas: Máximo 4 tuplas.
-        //var degrees_tuple_rotation = new List<(float, float)> {
+        //var degrees_tuple_rotation = new List<(float horizontal_degrees, float vertical_degrees)> {
         //(45,45),
         //(0,0),
         //(90,0),
         //(0,90)
         //};
-        //var degrees_rotation = $"[{string.Join(",", degrees_tuple_rotation.Select(tuple => $"('{tuple.Item1}','{tuple.Item2}')"))}]";
+        //var degrees_rotation = $"[{string.Join(",", degrees_tuple_rotation.Select(tuple => $"('{tuple.horizontal_degrees}','{tuple.vertical_degrees}')"))}]";
         //arguments.Add("degrees_rotation", degrees_rotation);
-        public static void PlotVectors(List<Vector> hyper_points, Dictionary<string, object> arguments = null, bool with_output = false) {
+        public static void PlotVectors(List<Vector> hyper_points, Dictionary<string, object> arguments = null) {
             if (hyper_points == null || !hyper_points.Any())
                 throw new ArgumentException("La lista <hyper_points> no puede ser nula o estar vacía.");
             hyper_points = hyper_points.Distinct().ToList();
             var dimensional_size = hyper_points.All(hyper_point => hyper_point.DimensionalSize > 1) ? hyper_points.First().DimensionalSize : 1;
             if (dimensional_size < 2)
                 throw new ArgumentException("Solo se pueden graficar vectores con al menos dos dimensiones.");
-            if (with_output) {
-                hyper_points.ForEach(hyper_point => Console.WriteLine(hyper_point.ToString()));
-                Console.WriteLine($"\nSe han creado {hyper_points.Count} puntos en el hiperespacio.");
-            }
             string path_to_script = @"C:\Users\Trifenix\Desktop\PlotPoints.py";
             if (arguments == null)
                 arguments = new Dictionary<string, object>();
@@ -101,14 +103,11 @@ namespace Services {
             PythonScripter.Run(path_to_script, arguments).ForEach(output_line => Console.WriteLine(output_line));
         }
 
-        public override string ToString() {
-            return $"({string.Join(",", coordinates)})";
-        }
+        //Evalúa la igualdad de vectores según sus coordenadas.
+        public override bool Equals(object obj) => obj is Vector vector && coordinates.SequenceEqual(vector.coordinates);
 
-        public override bool Equals(object obj) {
-            return obj is Vector vector && coordinates.SequenceEqual(vector.coordinates);
-        }
-
+        //HashCode es utilizado por diccionarios y/o LINQ para identificar de forma única a este objeto.
+        //En este caso, el HashCode está compuesto por las coordenadas del vector.
         public override int GetHashCode() {
             HashCode hash = new HashCode();
             foreach (var coordinate in coordinates)
@@ -116,5 +115,9 @@ namespace Services {
             return hash.ToHashCode();
         }
 
+        //Representa las coordenadas del vector de acuerdo con el siguiente formato: (x,y,z)
+        public override string ToString() => $"({string.Join(",", coordinates)})";
+
     }
+
 }

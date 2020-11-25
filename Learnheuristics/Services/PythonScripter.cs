@@ -2,10 +2,11 @@
 using System.Diagnostics;
 using System.Linq;
 
-namespace Services {
+namespace Learnheuristics.Services {
 
     public class PythonScripter {
 
+        //Permite ejecutar script's escritos en Python utilizando el interprete especificado en <path_to_interpreter>.
         public static List<string> Run(string path_to_script, Dictionary<string, object> arguments, string path_to_interpreter = @"C:\Python38\python.exe") {
             var output_lines = new List<string>();
             var this_process = Process.GetCurrentProcess();
