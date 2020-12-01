@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Learnheuristics.Components.Q_Learning.Services.Dynamic_Q_Table">
+    <Position X="18" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAEAAQAQAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Components\Q_Learning\Services\Dynamic_Q-Table.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="dynamicTable" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Learnheuristics.Services.DynamicTable">
+    <Position X="15.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAAAAAAAEEAAAAAAQUEECAAAAAAAUAIAAEFAECA=</HashCode>
+      <FileName>Services\DynamicTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Learnheuristics.Components.Black_Hole.Model.HyperCube">
+    <Position X="10.25" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAIAAIAAQAAAAAIAAAAAAAAAAAAAwBAwAAAIAAA=</HashCode>
+      <FileName>Components\Black_Hole\Model\HyperCube.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="middle_hyper_point" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="corner_hyper_points" />
+      <Field Name="inner_hyper_points" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Learnheuristics.Components.Black_Hole.Hypercubic_Black_Hole">
+    <Position X="12.5" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAACAAAAI=</HashCode>
+      <FileName>Components\Black_Hole\Hypercubic_Black-Hole.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Table" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Learnheuristics.Components.Q_Learning.Model.Q_Tuple&lt;ConfigurationType&gt;">
+    <Position X="19.75" Y="5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAQ=</HashCode>
+      <FileName>Components\Q_Learning\Model\Q-Tuple.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Learnheuristics.Components.Q_Learning.Stateless_Q_Learning">
+    <Position X="19.75" Y="3.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Components\Q_Learning\Stateless_Q-learning.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Learnheuristics.Components.Tuner">
+    <Position X="14.25" Y="1" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAABAAAI=</HashCode>
+      <FileName>Components\Tuner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Learnheuristics.Model.Configurations.Instances.NSGA_II.NSGA_II_Configuration">
+    <Position X="2" Y="7.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Configurations\Instances\NSGA_II\NSGA-II_Configuration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Learnheuristics.Model.Configurations.Instances.NSGA_III.NSGA_III_Configuration">
+    <Position X="4.25" Y="7.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Configurations\Instances\NSGA_III\NSGA-III_Configuration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Learnheuristics.Model.Configurations.Configuration&lt;Parameters_Enum&gt;">
+    <Position X="3.5" Y="3" Width="1.5" />
+    <AssociationLine Name="Parameters" Type="Learnheuristics.Model.Configurations.Parameter">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.131" Y="0.076" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Vectorized_Configuration" Type="Learnheuristics.Model.Vector">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.177" Y="0.095" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAIAABAAAAAAAAEgAAFAAQAACAQALAAAIAAAAAAAAE=</HashCode>
+      <FileName>Model\Configurations\Configuration.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Parameters" />
+      <Property Name="Vectorized_Configuration" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Learnheuristics.Model.Configurations.Parameter">
+    <Position X="0.5" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QAAEAAAAAAgAAAAAAAAFAAQAACAAAAAAAAAAQIAAAAA=</HashCode>
+      <FileName>Model\Configurations\Parameter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Learnheuristics.Model.Vector">
+    <Position X="7" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIIAAAAAAEAgAAAEgAIiAAAAAAAAAIAAABAACAABAAA=</HashCode>
+      <FileName>Model\Vector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Learnheuristics.Services.PythonScripter">
+    <Position X="12.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Services\PythonScripter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Learnheuristics.Model.Configurations.IConfiguration">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <AssociationLine Name="Vectorized_Configuration" Type="Learnheuristics.Model.Vector">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.595" Y="0.133" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAFAgQAACAAADAAAAAAAAAAAAE=</HashCode>
+      <FileName>Model\Configurations\IConfiguration.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Vectorized_Configuration" />
+    </ShowAsAssociation>
+  </Interface>
+  <Enum Name="Learnheuristics.Model.Configurations.Instances.NSGA_II.NSGA_II_Parameters">
+    <Position X="2" Y="9" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Model\Configurations\Instances\NSGA_II\NSGA_II_Parameters.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Learnheuristics.Model.Configurations.Instances.NSGA_III.NSGA_III_Parameters">
+    <Position X="4.25" Y="9" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Model\Configurations\Instances\NSGA_III\NSGA_III_Parameters.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

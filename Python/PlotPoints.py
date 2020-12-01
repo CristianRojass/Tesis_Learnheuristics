@@ -19,7 +19,7 @@ import os
 
 #Grafica los puntos y guarda una representación en imagen (png) 
 def Plot(x, y, z, black_hole, hypercube, epoch, degrees_tuples_rotation):
-	path_to_folder_container = f"C:\\Users\\Trifenix\\Desktop\\HyperSpace\\{hypercube}"
+	path_to_folder_container = f"C:\\Users\\Trifenix\\Desktop\\Tesis_Learnheuristics\\HyperSpace\\{hypercube}"
 	if(not os.path.exists(path_to_folder_container)):
 		os.makedirs(path_to_folder_container)
 	if(z == None):														#2D
@@ -100,7 +100,7 @@ def Main(x, y, z, black_hole, hypercube, epoch, degrees_tuples_rotation, open_im
 	if(open_image == True):
 		title = "Scatter2D" if z == None else "Scatter3D" if degrees_tuples_rotation == None else "Custom_Scatter3D"
 		title += f" - (Epoch_{epoch})"
-		path = f"C:\\Users\\Trifenix\\Desktop\\HyperSpace\\{hypercube}\\{title}.png"
+		path = f"C:\\Users\\Trifenix\\Desktop\\Tesis_Learnheuristics\\HyperSpace\\{hypercube}\\{title}.png"
 		OpenImage(path)
 
 #Mapea los argumentos de linea de comandos a variables
@@ -119,7 +119,7 @@ if(z != None):
 	z = ast.literal_eval(z)
 black_hole = args.get("black_hole")
 if(black_hole != None):
-	black_hole = [int(coordinate) for coordinate in black_hole.replace('(','').replace(')','').split(',')]
+	black_hole = [float(coordinate) for coordinate in black_hole.replace('(','').replace(')','').split(',')]
 hypercube_name = args.get("hypercube_name")
 if(hypercube_name == None):
 	sys.exit("Error: Falta el argumento <hypercube_name>.")

@@ -3,6 +3,9 @@
     //Propiedades y operaciones compartidas entre los distintos tipos de configuración.
     public interface IConfiguration {
 
+        //Nombre del problema con el que se identifica en el script de Python.
+        string ProblemName { get; set; }
+
         //Representación vectorial de la configuración.
         Vector Vectorized_Configuration { get; set; }
 

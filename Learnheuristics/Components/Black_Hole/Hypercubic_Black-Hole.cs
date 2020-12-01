@@ -15,13 +15,14 @@ namespace Learnheuristics.Components.Black_Hole {
 
         //Tabla dinámica utilizada para mostrar el progreso (en épocas) de cada black hole.
         private static DynamicTable Table;
+        private static string ProblemName;
 
         //Genera una red hipercúbica alrededor de la configuración vectorizada central, para luego aplicar el black hole concurrentemente en cada hipercubo.
         public static async Task<List<ConfigurationType>> Run<ConfigurationType>(ConfigurationType middle_configuration, float length, int factor, int depth, int inner_depth, int evaluation_duration, int number_of_epochs) where ConfigurationType : IConfiguration {
             if (middle_configuration == null)
                 throw new ArgumentNullException("<middle_configuration> no puede ser nulo.");
 
-            var path_to_folder_container = "C:\\Users\\Trifenix\\Desktop\\HyperSpace";
+            var path_to_folder_container = @"C:\Users\Trifenix\Desktop\Tesis_Learnheuristics\HyperSpace";
             if (Directory.Exists(path_to_folder_container))
                 Directory.Delete(path_to_folder_container, true);
 
@@ -29,6 +30,8 @@ namespace Learnheuristics.Components.Black_Hole {
             Console.WriteLine($"A continuación se procesarán los {HyperSpace.Count} hipercubos concurrentemente.\n");
             Table = new DynamicTable(Console.CursorTop, "Progreso", new string[] { "HiperCubo", "Época" }, HyperSpace.Select((hypercube, index) => new string[] { (index + 1).ToString(), "0" }).ToArray(), $"Época final: {number_of_epochs}");
             Table.Display();
+
+            ProblemName = middle_configuration.ProblemName;
 
             var black_holes_hypercubes_task = new List<Task<ConfigurationType>>();
             for (int i = 0; i < HyperSpace.Count; i++) {
@@ -71,10 +74,10 @@ namespace Learnheuristics.Components.Black_Hole {
             #endregion
 
             var stars = hypercube.inner_hyper_points;
-            var configurations = stars.Select(star => (ConfigurationType)Activator.CreateInstance(typeof(ConfigurationType), star)).ToList();
+            var configurations = stars.Select(star => (ConfigurationType)Activator.CreateInstance(typeof(ConfigurationType), star, ProblemName)).ToList();
             List<ConfigurationType> feasible_configurations = configurations.Where(configuration => configuration.IsFeasible()).ToList();
             var table_row = Convert.ToInt32(hypercube_name.Split("_")[1]) - 1;
-            bool IsFeasible = hypercube.corner_hyper_points.Select(corner_hyper_point => (ConfigurationType)Activator.CreateInstance(typeof(ConfigurationType), corner_hyper_point)).Where(configuration => configuration.IsFeasible()).Any() && feasible_configurations.Any();
+            bool IsFeasible = hypercube.corner_hyper_points.Select(corner_hyper_point => (ConfigurationType)Activator.CreateInstance(typeof(ConfigurationType), corner_hyper_point, ProblemName)).Where(configuration => configuration.IsFeasible()).Any() && feasible_configurations.Any();
             if (!IsFeasible) {
                 Table.Update("Inviable", table_row, 1);
                 return default;

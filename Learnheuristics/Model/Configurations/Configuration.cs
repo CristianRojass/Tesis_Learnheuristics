@@ -8,7 +8,10 @@ namespace Learnheuristics.Model.Configurations {
     public abstract class Configuration<Parameters_Enum> where Parameters_Enum : Enum {
 
         //Conjunto de restricciones y operaciones intrínsecas de cada parametro.
-        public static Parameter[] Parameters { get; set; }
+        public static Parameter[] Parameters;
+
+        //Nombre del problema con el que se identifica en el script de Python.
+        public string ProblemName { get; set; }
 
         //Representación vectorial de la configuración.
         public Vector Vectorized_Configuration { get; set; }

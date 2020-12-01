@@ -3,31 +3,31 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Learnheuristics.Model.Configurations.Instances.NSGA_III {
+namespace Learnheuristics.Model.Configurations.Instances.NSGA_II {
 
     //Representa una instancia de configuración.
-    public class NSGA_III_Configuration : Configuration<NSGA_III_Parameters>, IConfiguration {
+    public class NSGA_II_Configuration : Configuration<NSGA_II_Parameters>, IConfiguration {
 
         //Asigna restricciones de forma estática a la clase, ya que estas restricciones se comparten entre todas las instancias de la configuración.
-        static NSGA_III_Configuration() {
-            var number_of_parameters = Enum.GetNames(typeof(NSGA_III_Parameters)).Length;
+        static NSGA_II_Configuration() {
+            var number_of_parameters = Enum.GetNames(typeof(NSGA_II_Parameters)).Length;
             Parameters = new Parameter[number_of_parameters];
-            Parameters[(int)NSGA_III_Parameters.pop_size] = new Parameter {
+            Parameters[(int)NSGA_II_Parameters.pop_size] = new Parameter {
                 min_value = 1,
                 max_value = 100,
                 TransformByDomain = (value) => Convert.ToInt32(Math.Round(value))
             };
-            Parameters[(int)NSGA_III_Parameters.crossover_probability] = new Parameter {
+            Parameters[(int)NSGA_II_Parameters.crossover_probability] = new Parameter {
                 min_value = 0,
                 max_value = 100,
                 TransformByDomain = (value) => Convert.ToInt32(Math.Round(value))
             };
         }
 
-        public NSGA_III_Configuration(Vector Vectorized_Configuration, string ProblemName) {
+        public NSGA_II_Configuration(Vector Vectorized_Configuration, string ProblemName) {
             if (Vectorized_Configuration.DimensionalSize != Parameters.Length)
                 throw new ArgumentException($"La dimensión del vector {Vectorized_Configuration} no coincide con la cantidad de parámetros registrados en {GetType().Name}.");
-            if (string.IsNullOrEmpty(ProblemName))
+            if(string.IsNullOrEmpty(ProblemName))
                 throw new ArgumentException($"El argumento <ProblemName> no puede ser nulo o estar vacío.");
             this.Vectorized_Configuration = Vectorized_Configuration;
             this.ProblemName = ProblemName;
@@ -35,12 +35,12 @@ namespace Learnheuristics.Model.Configurations.Instances.NSGA_III {
         }
 
         //Evalúa la configuración: Este método debe ejecutar PythonScripter.Run para iniciar el script de python que utiliza la metaheurística de bajo nivel.
-        //En este caso, ejecuta NSGA-III.py
+        //En este caso, ejecuta NSGA-II.py
         public float Evaluate(int max_iterations = 1, int seed = 1) {
             string path_to_script = @"C:\Users\Trifenix\Desktop\Tesis_Learnheuristics\Python\Main.py";
             var arguments = new Dictionary<string, object> {
                 ["problem"] = ProblemName,
-                ["algorithm"] = "NSGAIII",
+                ["algorithm"] = "NSGAII",
                 ["pop_size"] = Parameter("pop_size"),
                 ["crossover_probability"] = Parameter("crossover_probability") / 100,
                 ["n_gen"] = max_iterations,

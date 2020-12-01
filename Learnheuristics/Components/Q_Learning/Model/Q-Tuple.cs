@@ -6,10 +6,10 @@ namespace Learnheuristics.Components.Q_Learning.Model {
     public class Q_Tuple<ConfigurationType> where ConfigurationType : IConfiguration {
 
         //Action: Para este problema, las acciones son representadas mediante configuraciones de algoritmo, los cuales se someten a un torneo basado en el q-value.
-        public ConfigurationType Action { get; set; }
+        public ConfigurationType Action;
 
         //Q-value: Mantiene el q-value acumulado a través de las evaluaciones realizadas al seleccionar la <Action> (configuración).
-        public float Q_value { get; set; }
+        public float Q_value;
 
         public Q_Tuple(ConfigurationType Action, float Q_value) {
             this.Action = Action;

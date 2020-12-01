@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 
 namespace Learnheuristics.Components {
 
@@ -23,6 +24,7 @@ namespace Learnheuristics.Components {
             for (int index = 0; index < candidate_solutions.Count; index++)
                 Console.WriteLine($"{index + 1}. {candidate_solutions[index]}");
             Console.WriteLine("\nA continuación se determinará cuál de estas soluciones es mejor mediante un torneo asistido por Stateless Q Learning.\n");
+            candidate_solutions = candidate_solutions.Distinct().ToList();
             var best_configuration = Run_Stateless_Q_Learning(candidate_solutions.ToArray(), iterations_by_round, duration_step_between_rounds, number_of_performances_to_average);
             var Table = new DynamicTable(Console.CursorTop, "Comprobación de resultado", new string[] { "Configuración", "IGD" }, candidate_solutions.Select(solution => new string[] { solution.ToString(), "─" }).ToArray());
             Table.Display($"Generación final: {verification_duration}");

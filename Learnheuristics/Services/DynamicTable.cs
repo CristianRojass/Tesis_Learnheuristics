@@ -7,19 +7,19 @@ namespace Learnheuristics.Services {
     public class DynamicTable {
 
         //Posición inicial (columna) en consola.
-        private int InitialRowPosition { get; set; }
+        private readonly int InitialRowPosition;
 
         //Título de la tabla.
-        private string Title { get; }
+        private readonly string Title;
 
         //Cabeceras de la tabla.
-        private string[] Headers { get; }
+        private readonly string[] Headers;
 
         //Tabla.
-        private string[][] Table { get; set; }
+        private string[][] Table;
 
         //Mensaje a los pies de la tabla.
-        private string Footer_Message { get; set; }
+        private string Footer_Message;
 
         //Ancho total de la tabla: Considera el ancho de cada columna y los caracteres especiales que delimitan la tabla.
         private int Width => Headers.Select((column, index) => GetWidth(index)).Sum() + 2 + (Headers.Length - 1);
